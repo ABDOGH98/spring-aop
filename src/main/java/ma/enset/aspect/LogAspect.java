@@ -15,9 +15,10 @@ import java.util.logging.Logger;
 public class LogAspect {
     Logger logger = Logger.getLogger(LogAspect.class.getName());
 
-    @Around("execution(* ma.enset.service.IMetier..*())")
+    //@Around("execution(* ma.enset.service.IMetier..*())")
+    @Around("@annotation(ma.enset.aspect.Log)")
     Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        System.out.println("From logging Aspect ....... Before "+proceedingJoinPoint.getSignature().getName());
+        logger.info("From logging Aspect ....... Before "+proceedingJoinPoint.getSignature().getName());
         Object result = proceedingJoinPoint.proceed();
         return result;
     }
